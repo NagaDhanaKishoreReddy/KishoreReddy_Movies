@@ -5,4 +5,5 @@ import com.mvvm_withroom.network.NetworkHelper
 class MoviesRepository(private val apiHelper: NetworkHelper) {
 
     suspend fun getMoviesList() = apiHelper.getMoviesList()
+    suspend fun getMovieDetails() = apiHelper.getMovieDetails()
 }

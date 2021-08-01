@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.mvvm_withroom.network.MoviesBuilder
 import com.mvvm_withroom.network.NetworkHelper
+import com.mvvm_withroom.response.MovieDetailsResponse
 import com.mvvm_withroom.response.SearchMovieResponse
 import com.mvvm_withroom.utils.Status
 import com.mvvm_withroom.viewmodel.MoviesViewModel
@@ -48,9 +49,27 @@ import com.mvvm_withroom.viewmodel.ViewModelFactory
                  }
              }
          })
+         viewModel.getMovieDetails().observe(this, Observer {
+             it?.let { resource ->
+                 when (resource.status) {
+                     Status.SUCCESS -> {
+                         resource.data?.let { moviesDetailsList -> retrieveDetailsList(moviesDetailsList) }
+                     }
+                     Status.ERROR -> {
+                         Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
+                     }
+                     Status.LOADING -> {
+                         Toast.makeText(this, "loading", Toast.LENGTH_LONG).show()
+                     }
+                 }
+             }
+         })
      }
 
      private fun retrieveList(searchMovieResponse: SearchMovieResponse) {
+        Log.i("Response", "")
+     }
+     private fun retrieveDetailsList(searchMovieResponse: MovieDetailsResponse) {
         Log.i("Response", "")
      }
 }
