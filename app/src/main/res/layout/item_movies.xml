@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="@dimen/size_16dp"
+    android:paddingBottom="@dimen/size_16dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textMovies"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/movie_name"
+        android:textSize="@dimen/size_18sp"
+        android:textStyle="bold"
+        android:textColor="@color/color_000000"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textMoviesRating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/movie_rating"
+        android:textSize="@dimen/size_18sp"
+        android:textStyle="bold"
+        android:drawablePadding="@dimen/size_16dp"
+        android:drawableEnd="@drawable/ic_right_arrow"
+        android:textColor="@color/color_000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textMovies"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textMoviesDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/movie_date"
+        android:textSize="@dimen/size_16sp"
+        android:textColor="@color/color_CECECE"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textMoviesRating"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
