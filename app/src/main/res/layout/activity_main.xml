@@ -15,20 +15,15 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/color_000000"
+            android:background="@color/teal_200"
             app:popupTheme="@style/Theme.MVVM_WithRoom.PopupOverlay" >
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/item_headlines"
-                android:gravity="center"
-                android:textSize="@dimen/size_29dp"
-                android:textColor="@color/color_FFFFFF" />
 
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
+
+
 
     <include layout="@layout/content_main" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
