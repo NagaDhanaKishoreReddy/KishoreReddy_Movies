@@ -22,4 +22,5 @@
     <style name="Theme.MVVM_WithRoom.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.MVVM_WithRoom.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
 </resources>

@@ -18,10 +18,10 @@ data class SearchMovieResponse(
 
 data class Movie(
     @field:SerializedName("overview")
-    val overview: String? = null,
+    public val overview: String? = null,
 
     @field:SerializedName("original_language")
-    val originalLanguage: String? = null,
+    public val originalLanguage: String? = null,
 
     @field:SerializedName("original_title")
     val originalTitle: String? = null,

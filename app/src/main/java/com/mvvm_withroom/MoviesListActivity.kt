@@ -4,8 +4,14 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.mvvm_withroom.adapter.MoviesAdapter
+import com.mvvm_withroom.databinding.ActivityMainBinding
 import com.mvvm_withroom.network.MoviesBuilder
 import com.mvvm_withroom.network.NetworkHelper
 import com.mvvm_withroom.response.MovieDetailsResponse
@@ -14,25 +20,33 @@ import com.mvvm_withroom.utils.Status
 import com.mvvm_withroom.viewmodel.MoviesViewModel
 import com.mvvm_withroom.viewmodel.ViewModelFactory
 
- class MainActivity : AppCompatActivity() {
+ class MoviesListActivity : AppCompatActivity() {
      private lateinit var viewModel: MoviesViewModel
+     private lateinit var adapter: MoviesAdapter
+     private lateinit var mBinding : ActivityMainBinding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
         setupViewModel()
+        setupUI()
         setupObservers()
 
     }
 
-    private fun setupViewModel() {
+     private fun setupUI() {
+
+     }
+
+     private fun setupViewModel() {
         viewModel = ViewModelProviders.of(
             this,
             ViewModelFactory(NetworkHelper(MoviesBuilder.apiService))
         ).get(MoviesViewModel::class.java)
     }
-
+     
      private fun setupObservers() {
          viewModel.getMoviesList().observe(this, Observer {
              it?.let { resource ->
@@ -49,7 +63,7 @@ import com.mvvm_withroom.viewmodel.ViewModelFactory
                  }
              }
          })
-         viewModel.getMovieDetails().observe(this, Observer {
+    /*     viewModel.getMovieDetails().observe(this, Observer {
              it?.let { resource ->
                  when (resource.status) {
                      Status.SUCCESS -> {
@@ -63,12 +77,29 @@ import com.mvvm_withroom.viewmodel.ViewModelFactory
                      }
                  }
              }
-         })
+         })*/
      }
 
      private fun retrieveList(searchMovieResponse: SearchMovieResponse) {
-        Log.i("Response", "")
+
+         mBinding.rvMovies.also {
+             it.layoutManager = GridLayoutManager(this, 1)
+             it.setHasFixedSize(true)
+             it.adapter =
+                 MoviesAdapter(
+                     searchMovieResponse,
+                 )
+             mBinding.rvMovies.addItemDecoration(
+                 DividerItemDecoration(
+                     mBinding.rvMovies.context,
+                     (mBinding.rvMovies.layoutManager as GridLayoutManager).orientation
+                 )
+             )
+
+
+         }
      }
+
      private fun retrieveDetailsList(searchMovieResponse: MovieDetailsResponse) {
         Log.i("Response", "")
      }
