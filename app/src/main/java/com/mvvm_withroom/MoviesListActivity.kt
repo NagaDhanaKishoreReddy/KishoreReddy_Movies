@@ -69,7 +69,7 @@ import com.mvvm_withroom.viewmodel.ViewModelFactory
                          Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
                      }
                      Status.LOADING -> {
-                         Toast.makeText(this, "loading", Toast.LENGTH_LONG).show()
+
                      }
                  }
              }
