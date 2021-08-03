@@ -1,6 +1,7 @@
  package com.mvvm_withroom
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -32,6 +33,7 @@ import com.mvvm_withroom.viewmodel.ViewModelFactory
         setSupportActionBar(findViewById(R.id.toolbar))
         setupViewModel()
         setupUI()
+        showLoader(true)
         setupObservers(query)
 
     }
@@ -40,6 +42,7 @@ import com.mvvm_withroom.viewmodel.ViewModelFactory
             mBinding.textGo.setOnClickListener {
                 if (!mBinding.searchView.query.toString().isNullOrEmpty()) {
                     query = mBinding.searchView.query.toString()
+                    showLoader(true)
                     setupObservers(query)
                 }
             }
@@ -58,9 +61,11 @@ import com.mvvm_withroom.viewmodel.ViewModelFactory
              it?.let { resource ->
                  when (resource.status) {
                      Status.SUCCESS -> {
+                         showLoader(false)
                          resource.data?.let { moviesList -> retrieveList(moviesList) }
                      }
                      Status.ERROR -> {
+                         showLoader(false)
                          Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
                      }
                      Status.LOADING -> {
@@ -86,6 +91,15 @@ import com.mvvm_withroom.viewmodel.ViewModelFactory
                      (mBinding.rvMovies.layoutManager as GridLayoutManager).orientation
                  )
              )
+         }
+     }
+     private fun showLoader(shouldShow : Boolean) {
+         if (shouldShow) {
+             mBinding.pbLoader.visibility = View.VISIBLE
+             mBinding.rvMovies.visibility = View.GONE
+         } else {
+             mBinding.pbLoader.visibility = View.GONE
+             mBinding.rvMovies.visibility = View.VISIBLE
          }
      }
 }

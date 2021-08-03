@@ -19,6 +19,12 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="AppProgress" parent="Theme.AppCompat.Light">
+        <item name="colorAccent">@color/purple_500</item>
+        <item name="colorPrimary">@color/purple_500</item>
+    </style>
+
+
     <style name="Theme.MVVM_WithRoom.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.MVVM_WithRoom.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />

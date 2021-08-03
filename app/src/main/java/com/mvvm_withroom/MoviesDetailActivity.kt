@@ -6,16 +6,12 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
-import com.mvvm_withroom.adapter.MoviesAdapter
-import com.mvvm_withroom.databinding.ActivityMainBinding
 import com.mvvm_withroom.databinding.MoviesDetailsBinding
 import com.mvvm_withroom.network.MoviesBuilder
 import com.mvvm_withroom.network.NetworkHelper
 import com.mvvm_withroom.response.MovieDetailsResponse
-import com.mvvm_withroom.response.SearchMovieResponse
+import com.mvvm_withroom.utils.AppConstants
 import com.mvvm_withroom.utils.Status
 import com.mvvm_withroom.viewmodel.MoviesViewModel
 import com.mvvm_withroom.viewmodel.ViewModelFactory
@@ -23,6 +19,7 @@ import com.mvvm_withroom.viewmodel.ViewModelFactory
 class MoviesDetailActivity : AppCompatActivity() {
     private lateinit var mBinding : MoviesDetailsBinding
     private lateinit var viewModel: MoviesViewModel
+    var movieId : String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +30,8 @@ class MoviesDetailActivity : AppCompatActivity() {
     }
 
     private fun setupUi() {
-        mBinding
+        val bundle = intent.extras
+        movieId = bundle!!.getString("movieId")
     }
 
     private fun setupViewModel() {
@@ -44,7 +42,7 @@ class MoviesDetailActivity : AppCompatActivity() {
     }
 
     private fun setupObservers() {
-             viewModel.getMovieDetails().observe(this, Observer {
+             viewModel.getMovieDetails(movieId, AppConstants.apiKey, AppConstants.language).observe(this, Observer {
                  it?.let { resource ->
                      when (resource.status) {
                          Status.SUCCESS -> {

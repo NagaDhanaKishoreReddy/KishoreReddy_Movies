@@ -17,10 +17,10 @@ class MoviesViewModel(private val moviesRepository: MoviesRepository) : ViewMode
         }
     }
 
-    fun getMovieDetails() = liveData(Dispatchers.IO) {
+    fun getMovieDetails(movieId: String?, apiKey: String, language: String) = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
         try {
-            emit(Resource.success(data = moviesRepository.getMovieDetails()))
+            emit(Resource.success(data = moviesRepository.getMovieDetails(movieId, apiKey, language)))
         } catch (exception: Exception) {
             emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
         }

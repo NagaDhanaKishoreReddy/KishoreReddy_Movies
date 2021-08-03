@@ -1,6 +1,7 @@
 package com.mvvm_withroom.adapter
 
 import android.content.Intent
+import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -39,7 +40,10 @@ class MoviesAdapter(private val moviesList: SearchMovieResponse) : RecyclerView.
         holder.mBinding.tvReleaseDate.text = moviesList.results?.get(position)?.releaseDate
         holder.mBinding.tvMovieRating.text = moviesList.results?.get(position)?.voteAverage.toString()
         holder.itemView.setOnClickListener { v ->
+            val bundle = Bundle()
+            bundle.putString("movieId", moviesList.results?.get(position)?.id.toString())
             val intent = Intent(v.context, MoviesDetailActivity::class.java)
+            intent.putExtras(bundle)
             v.context.startActivity(intent)
 
         }
