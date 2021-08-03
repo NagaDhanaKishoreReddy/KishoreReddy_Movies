@@ -13,5 +13,7 @@
     <color name="color_464646">#464646</color>
     <color name="color_FFFFFF">#FFFFFF</color>
     <color name="color_CECECE">#CECECE</color>
+    <color name="darkBlue">#042f45</color>
+    <color name="grey">#9b9b9b</color>
 
 </resources>

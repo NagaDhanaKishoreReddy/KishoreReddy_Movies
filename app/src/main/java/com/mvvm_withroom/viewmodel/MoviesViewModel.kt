@@ -8,10 +8,10 @@ import kotlinx.coroutines.Dispatchers
 
 class MoviesViewModel(private val moviesRepository: MoviesRepository) : ViewModel() {
 
-    fun getMoviesList() = liveData(Dispatchers.IO) {
+    fun getMoviesList(apiKey: String, language: String, query: String, pageNo: Int) = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
         try {
-            emit(Resource.success(data = moviesRepository.getMoviesList()))
+            emit(Resource.success(data = moviesRepository.getMoviesList(apiKey, language, query, pageNo)))
         } catch (exception: Exception) {
             emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
         }
