@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.mvvm_withroom.adapter.MoviesAdapter
 import com.mvvm_withroom.databinding.ActivityMainBinding
 import com.mvvm_withroom.network.MoviesBuilder
@@ -46,6 +47,14 @@ import com.mvvm_withroom.viewmodel.ViewModelFactory
                     setupObservers(query)
                 }
             }
+
+         mBinding.rvMovies.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                 super.onScrolled(recyclerView, dx, dy)
+
+
+             }
+         })
      }
 
      private fun setupViewModel() {
@@ -56,7 +65,6 @@ import com.mvvm_withroom.viewmodel.ViewModelFactory
     }
      
      private fun setupObservers(query: String) {
-
          viewModel.getMoviesList(AppConstants.apiKey, AppConstants.language, this.query, pageNo).observe(this, Observer {
              it?.let { resource ->
                  when (resource.status) {
@@ -81,6 +89,7 @@ import com.mvvm_withroom.viewmodel.ViewModelFactory
          mBinding.rvMovies.also {
              it.layoutManager = GridLayoutManager(this, 1)
              it.setHasFixedSize(true)
+             pageNo++
              it.adapter =
                  MoviesAdapter(
                      searchMovieResponse,

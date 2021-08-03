@@ -32,6 +32,9 @@ class MoviesDetailActivity : AppCompatActivity() {
     private fun setupUi() {
         val bundle = intent.extras
         movieId = bundle!!.getString("movieId")
+        mBinding.buttonBack.setOnClickListener {
+            finish()
+        }
     }
 
     private fun setupViewModel() {
@@ -65,6 +68,7 @@ class MoviesDetailActivity : AppCompatActivity() {
             .into(mBinding.imagePoster)
         mBinding.textTitle.text = movieDetailsResponse.title
         mBinding.ratingBar.rating = movieDetailsResponse.voteCount!!.toFloat()
+        mBinding.ratingBar.setIsIndicator(true);
         mBinding.textVoteCount.text = movieDetailsResponse.voteCount.toString() +" k reviews"
        // mBinding.textDuration.text = movieDetailsResponse.runtime.toString()
         mBinding.textReleaseDate.text = movieDetailsResponse.releaseDate
